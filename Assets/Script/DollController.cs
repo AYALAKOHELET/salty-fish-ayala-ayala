@@ -32,18 +32,22 @@ public class DollController : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(minTime, maxTime ));
 
             Rotate();
-            //anim.SetInteger("AnimoinPlay", 0);
+            
         }
 
 
     }
+
+    public void SetIntegerTo()
+    {
+        anim.SetInteger("AnimoinPlay", 0);
+    }
+
     public void Rotate()
     {
-
         anim.SetInteger("AnimoinPlay",  Random.Range(minAnimaoinPlay, manAnimaoinPlay));
         print("AnimoinPlay");
         
-
     }
 
 
