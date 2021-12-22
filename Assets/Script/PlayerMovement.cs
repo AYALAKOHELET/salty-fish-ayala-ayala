@@ -5,8 +5,10 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody rb;
-
+    [SerializeField] private GameObject doll;
+   
     [SerializeField] private int speed;
+    public bool isMoving = false;
 
     private float vInput;
     private float hInput;
@@ -19,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
     }
-   
+
     private void Update()
     {
         vInput = Input.GetAxis(VERTICAL_AXIS) * speed;
@@ -27,7 +29,17 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = new Vector3(hInput, 0, vInput);
         rb.AddForce(move * speed * Time.deltaTime);
+        if (rb.velocity.magnitude > 0)
+        {
+            isMoving = true;
+        }
+        else
+        {
+            isMoving = false;
+        }
+
+
     }
 
-    
+   
 }
