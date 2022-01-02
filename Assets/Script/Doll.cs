@@ -47,7 +47,7 @@ public class Doll : MonoBehaviour
 
         yield return new WaitForSeconds(1);
         transform.rotation = Quaternion.Euler(0, 180, 0);
-        yield return new WaitForSeconds(Random.Range(1, 10));
+        yield return new WaitForSeconds(Random.Range(1, 5));
         Rotate();
     }
 
