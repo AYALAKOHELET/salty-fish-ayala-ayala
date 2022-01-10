@@ -9,6 +9,12 @@ public class Doll : MonoBehaviour
     [SerializeField] GameObject player;
 
     [SerializeField] private PlayerMovement playerScript;
+
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip[] audioClips;
+
+ 
+    
    
     private float angle1 = -70f;
     private float angle2 = 70f;
@@ -16,14 +22,16 @@ public class Doll : MonoBehaviour
    
     void Start()
     {
+        audioSource = this.GetComponent<AudioSource>();
         transform = GetComponent<Transform>();
         randomRotation = Random.Range(0, 70);
-        Rotate();
+        Rotate(); 
     }
 
    
     private void Rotate()
     {
+       
        transform.rotation = Quaternion.Euler(0,  randomRotation, 0) ;
        StartCoroutine(Wait());
     }
@@ -48,7 +56,7 @@ public class Doll : MonoBehaviour
         yield return new WaitForSeconds(1);
         transform.rotation = Quaternion.Euler(0, 180, 0);
         yield return new WaitForSeconds(Random.Range(1, 5));
-        Rotate();
+        PlaySound();
     }
 
     private IEnumerator FallAgain()
@@ -62,6 +70,20 @@ public class Doll : MonoBehaviour
 
         Debug.Log("Icatch You");    
         StartCoroutine(FallAgain());
+    }
+    private IEnumerator SoundBeforeRotate()
+    {
+        
+        yield return new WaitForSeconds(1f);
+        Rotate();
+        
+    }
+
+    private void PlaySound()
+    {
+        audioSource.clip = audioClips[0];
+        audioSource.Play();
+        StartCoroutine(SoundBeforeRotate());
     }
 
 }
