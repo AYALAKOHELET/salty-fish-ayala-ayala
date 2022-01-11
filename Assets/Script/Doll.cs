@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Doll : MonoBehaviour
 {
@@ -13,8 +14,26 @@ public class Doll : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip[] audioClips;
 
- 
-    
+    public UnityAction <bool, int> isPlayerCaught;
+
+    [SerializeField]
+    private bool isCaught;
+
+    [SerializeField]
+    private int PlayerHp = 4;
+
+    private bool IsCaught
+    {
+        get { return isCaught; }
+        set 
+        { 
+            isCaught = value;
+            if (isCaught)
+            {
+                isPlayerCaught?.Invoke(isCaught, PlayerHp);
+            }
+        }
+    }
    
     private float angle1 = -70f;
     private float angle2 = 70f;
@@ -63,11 +82,13 @@ public class Doll : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         player.transform.rotation = Quaternion.Euler(0, 0, 0);
+        isCaught = false;
     }
 
     private void PlayerFall()
     {
-
+        isCaught = true;
+        PlayerHp--;
         Debug.Log("Icatch You");    
         StartCoroutine(FallAgain());
     }
