@@ -1,14 +1,13 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
     private Text PlayerHPText;
-    
+
     [SerializeField]
     private Doll Doll;
 
@@ -25,7 +24,7 @@ public class UIManager : MonoBehaviour
             Debug.Log("PlayerHP:" + PlayerHp);
             PlayerHPText.text = $"PlayerHP:{PlayerHp.ToString()}";
             isCaught = false;
-        } 
+        }
     }
 
 }

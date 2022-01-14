@@ -14,27 +14,14 @@ public class Doll : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip[] audioClips;
 
-    public UnityAction <bool, int> isPlayerCaught;
+    public UnityAction<bool, int> isPlayerCaught;
 
-    [SerializeField]
+    
     private bool isCaught;
 
     [SerializeField]
     private int PlayerHp = 4;
 
-    private bool IsCaught
-    {
-        get { return isCaught; }
-        set 
-        { 
-            isCaught = value;
-            if (isCaught)
-            {
-                isPlayerCaught?.Invoke(isCaught, PlayerHp);
-            }
-        }
-    }
-   
     private float angle1 = -70f;
     private float angle2 = 70f;
     float randomRotation = 0.0f;
@@ -47,7 +34,21 @@ public class Doll : MonoBehaviour
         Rotate(); 
     }
 
-   
+    void Update()
+    {
+        CheekIfToInvoke();
+
+    }
+
+    private void CheekIfToInvoke()
+    {
+        if (isCaught)
+        {
+            isPlayerCaught?.Invoke(isCaught, PlayerHp);
+        }
+        
+    }
+
     private void Rotate()
     {
        
@@ -93,11 +94,9 @@ public class Doll : MonoBehaviour
         StartCoroutine(FallAgain());
     }
     private IEnumerator SoundBeforeRotate()
-    {
-        
+    {      
         yield return new WaitForSeconds(1f);
-        Rotate();
-        
+        Rotate();     
     }
 
     private void PlaySound()
