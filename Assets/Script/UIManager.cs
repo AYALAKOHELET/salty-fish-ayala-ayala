@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
 
     private void ChangeTheNumberHPText(bool isCaught, int PlayerHp)
     {
-        if (isCaught == true)
+        if (isCaught == true )
         {
             Debug.Log("PlayerHP:" + PlayerHp);
             PlayerHPText.text = $"PlayerHP:{PlayerHp.ToString()}";
