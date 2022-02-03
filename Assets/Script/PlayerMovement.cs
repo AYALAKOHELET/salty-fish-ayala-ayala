@@ -16,10 +16,12 @@ public class PlayerMovement : MonoBehaviour
     private const string VERTICAL_AXIS = "Vertical";
     private const string HORIZPNTAL_AXIS = "Horizontal";
 
+    private Vector3 startPos;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+        startPos = this.transform.position;
     }
 
     private void Update()
@@ -41,5 +43,9 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-   
+    public void ResetLocation()
+    {
+        this.transform.position = startPos;
+    }
+
 }

@@ -9,6 +9,7 @@ public class Doll : MonoBehaviour
   
     [SerializeField] GameObject player;
 
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private PlayerMovement playerScript;
 
     [SerializeField] private AudioSource audioSource;
@@ -18,13 +19,13 @@ public class Doll : MonoBehaviour
 
     
     private bool isCaught;
-
-    [SerializeField]
-    private int PlayerHp = 4;
+    //[SerializeField]
+    //private int PlayerHp = 4;
 
     private float angle1 = -70f;
     private float angle2 = 70f;
     float randomRotation = 0.0f;
+
    
     void Start()
     {
@@ -44,7 +45,7 @@ public class Doll : MonoBehaviour
     {
         if (isCaught)
         {
-            isPlayerCaught?.Invoke(isCaught, PlayerHp);
+            isPlayerCaught?.Invoke(isCaught, gameManager.PlayerHp);
         }
         
     }
@@ -84,13 +85,15 @@ public class Doll : MonoBehaviour
         yield return new WaitForSeconds(1f);
         player.transform.rotation = Quaternion.Euler(0, 0, 0);
         isCaught = false;
+        yield return new WaitForSeconds(0.5f);
+        playerScript.ResetLocation();
     }
 
     private void PlayerFall()
     {
         isCaught = true;
-        PlayerHp--;
-        Debug.Log("Icatch You");    
+        gameManager.PlayerHp--;
+        Debug.Log("Icatch You");
         StartCoroutine(FallAgain());
     }
     private IEnumerator SoundBeforeRotate()

@@ -1,17 +1,16 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     private int playerHp = 4;
 
-    [SerializeField]
-    private Text PlayerHPText;
+    [SerializeField] private Text PlayerHPText;
 
-    [SerializeField]
-    private Doll Doll;
+    [SerializeField] private Doll Doll;
 
     public int PlayerHp
     {
@@ -22,7 +21,8 @@ public class UIManager : MonoBehaviour
 
             if (playerHp == 0)
             {
-                Debug.Log("game,,,,,");
+                SceneManager.LoadScene(1);
+
             }
         }
     }
@@ -34,12 +34,11 @@ public class UIManager : MonoBehaviour
 
     private void ChangeTheNumberHPText(bool isCaught, int PlayerHp)
     {
-        if (isCaught == true )
+        if (isCaught == true)
         {
             Debug.Log("PlayerHP:" + PlayerHp);
             PlayerHPText.text = $"PlayerHP:{PlayerHp.ToString()}";
             isCaught = false;
         }
     }
-
 }
